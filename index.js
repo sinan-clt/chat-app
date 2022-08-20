@@ -52,6 +52,8 @@ io.use((socket, next) => {
 let users = [];
 io.on('connection', async socket => {
 
+  console.log(`One user connected to the socket with ${socket.id}`);
+
   // socket methods
   const methods = {
     getToken: (sender, receiver) => {
