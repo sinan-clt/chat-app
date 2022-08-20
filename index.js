@@ -3,12 +3,10 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 
-const PORT = process.env.PORT || process
-
 require('./dbConnect');
 const tokenModel = require('./schema');
 
-const app = express(); 
+const app = express();
 
 // init socket server
 const http = require('http');
@@ -124,6 +122,6 @@ io.on('connection', async socket => {
 
 });
 
-server.listen(PORT, () => {
+server.listen(3000, () => {
   console.log(`Server is running on port 3000...`);
 });
