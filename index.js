@@ -6,7 +6,7 @@ dotenv.config({path: './config.env'});
 require('./dbConnect');
 const tokenModel = require('./schema');
 
-const app = express();
+const app = express(); 
 
 // init socket server
 const http = require('http');
