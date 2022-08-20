@@ -45,7 +45,7 @@ io.use((socket, next) => {
   // create new session
   socket.username = username;
   socket.id = userID;
-  next();
+  next(); 
 });
 
 // socket events
