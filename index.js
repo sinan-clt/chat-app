@@ -3,6 +3,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 
+const PORT = process.env.PORT || 3000;
+
 require('./dbConnect');
 const tokenModel = require('./schema');
 
@@ -21,8 +23,14 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
 // app homepage
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/public/index.html');
+// });
+
+// app homepage
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.write(`fdsfsdfsdf: ${PORT}`);
+  res.end();
 });
 
 // session post page
@@ -120,6 +128,10 @@ io.on('connection', async socket => {
 
 });
 
-server.listen(3000, () => {
+// server.listen(3000, () => {
+//   console.log(`Server is running on port 3000...`);
+// });
+
+server.listen(PORT, () => {
   console.log(`Server is running on port 3000...`);
 });
