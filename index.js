@@ -118,11 +118,22 @@ io.on('connection', async socket => {
 
   console.log(users);
 
+
+  socket.on('typing', (data)=>{
+    console.log(data);
+ })
+
+
   // get message from client
   socket.on('message-to-server', payload => {
     io.to(payload.to).emit('message-to-user', payload);
     methods.saveMessages(payload);
   });
+
+  // socket.on('typing', () => {
+  //   console.log(socket.id, 'typing');
+  //   socket.broadcast.emit("typing", {username:socket.username});
+  // });
 
   // fetch previous messages
   socket.on('fetch-messages', ({receiver}) => {

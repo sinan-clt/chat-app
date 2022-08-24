@@ -11,6 +11,8 @@ const userTagline = document.querySelector('#users-tagline');
 const title = document.querySelector('#active-user');
 const messages = document.querySelector('.messages');
 const msgDiv = document.querySelector('.msg-form');
+const typing = document.querySelector('#message');
+
 
 // Global methods
 const methods = {
@@ -157,6 +159,11 @@ msgForm.addEventListener('submit', e => {
 });
 
 // receive private message
+
+typing.addEventListener('keyup', ()=>{
+  socket.emit('typing');
+})
+
 socket.on('message-to-user', ({from, message, time}) => {
   const receiver = title.getAttribute('userID');
   const notify = document.getElementById(from);
@@ -173,6 +180,18 @@ socket.on('message-to-user', ({from, message, time}) => {
     notify.classList.remove('d-none');
   }
 });
+
+// messageas.bind('keypress', () => {
+//   console.log('keypress');
+//   socket.emit('typing');
+// })
+
+// socket.on('typing' ,(data) => {
+//   console.log('typingggg')
+//   feedback.html('<p><i>' + data.username + "is typing a message...." + "</i></p>");
+
+// })
+
 
 // get stored messages from MongoDB
 socket.on('stored-messages', ({messages}) => {
