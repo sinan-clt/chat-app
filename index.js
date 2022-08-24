@@ -25,6 +25,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+app.get('/onlineusers', (req, res) => {
+  res.json(users);
+});
+
 // session post page
 const { v4: uuidv4 } = require('uuid');
 app.post('/session', (req, res) => {
@@ -50,9 +54,20 @@ io.use((socket, next) => {
 
 // socket events
 let users = [];
+// var countt = 0;
+
 io.on('connection', async socket => {
 
-  // console.log(`One user connected to the socket with ${socket.id}`);
+  console.log(`One user connected to the socket with ${socket.id}`);
+  
+  // countt++;
+  // io.emit('usercnt',countt);
+
+  // socket.on('disconnect', () => {
+  //   console.log('User disconnected');
+  //   countt--;
+  //   io.emit('usercnt', countt);
+  // });
 
   // socket methods
   const methods = {
@@ -121,6 +136,8 @@ io.on('connection', async socket => {
   });
 
 });
+
+
 
 server.listen(3000, () => {
   console.log(`Server is running on port 3000...`);

@@ -94,6 +94,10 @@ loginForm.addEventListener('submit', (e) => {
 });
 
 // user list table
+// socket.on('usercnt', function(msg){
+//   document.getElementById("countt").innerHTML = msg;
+// })
+
 socket.on('users', ({users}) => {
   // console.log(users);
 
