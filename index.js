@@ -54,20 +54,11 @@ io.use((socket, next) => {
 
 // socket events
 let users = [];
-// var countt = 0;
 
 io.on('connection', async socket => {
 
-  console.log(`One user connected to the socket with ${socket.id}`);
-  
-  // countt++;
-  // io.emit('usercnt',countt);
-
-  // socket.on('disconnect', () => {
-  //   console.log('User disconnected');
-  //   countt--;
-  //   io.emit('usercnt', countt);
-  // });
+  // console.log(`One user connected to the socket with ${socket.username}`);
+  console.log(`${socket.username} connected`);
 
   // socket methods
   const methods = {
@@ -120,9 +111,12 @@ io.on('connection', async socket => {
 
   socket.on('disconnect', () => {
     users = users.filter( user => user.userID !== socket.id);
+    console.log(socket.username, 'disconnected');
     io.emit('users', {users} );
     io.emit('user-away', socket.id);
   });
+
+  console.log(users);
 
   // get message from client
   socket.on('message-to-server', payload => {
