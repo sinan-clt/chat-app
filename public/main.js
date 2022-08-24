@@ -13,6 +13,9 @@ const messages = document.querySelector('.messages');
 const msgDiv = document.querySelector('.msg-form');
 const typing = document.querySelector('#message');
 
+const message_typing = document.getElementById("message");
+const feedback = document.getElementById("feedback");
+
 
 // Global methods
 const methods = {
@@ -58,6 +61,7 @@ const methods = {
     msgDiv.classList.remove('d-none');
     messages.classList.remove('d-none');
     messages.innerHTML = '';
+    // feedback.innerHTML = '';
     socket.emit('fetch-messages', {receiver: userID});
     const notify = document.getElementById(userID);
     notify.classList.add('d-none');
@@ -225,4 +229,17 @@ socket.on('user-away', userID => {
     msgDiv.classList.add('d-none');
     messages.classList.add('d-none');
   }
+})
+
+message_typing.addEventListener('keypress', ()=> {
+  socket.emit("typing", username.value);
+})
+// feedback.innerHTML="";
+
+socket.on("typing", (username) => {
+  feedback.innerHTML=`<p><em>${username}</em> is typing....</p>`;
+  setTimeout(() => {
+    feedback.innerHTML = "";
+  }, 3000);
+
 })

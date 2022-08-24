@@ -140,6 +140,16 @@ io.on('connection', async socket => {
     methods.fetchMessages(socket.id, receiver);
   });
 
+
+  // socket.on("typing", (data) => {
+    socket.on("typing", () => {
+      //   socket.broadcast.emit("typing", username);
+      //   // io.emit
+        socket.broadcast.emit("typing", socket.username);
+        console.log(socket.username);
+      });
+    
+
 });
 
 
